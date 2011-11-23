@@ -27,16 +27,17 @@
 
 -(IBAction)openButtonPushed:(id)sender {
     NSLog(@"%s", __func__);
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:urlField.stringValue]) {
-        //errorField.stringValue = urlField.stringValue;
-        NSString *filePath = [urlField.stringValue stringByExpandingTildeInPath];
-        NSString *windowPath = [@"~/Library" stringByExpandingTildeInPath];
-        [[NSWorkspace sharedWorkspace] selectFile:urlField.stringValue 
-                         inFileViewerRootedAtPath:windowPath ];
+    NSString *filePath = [urlField.stringValue stringByExpandingTildeInPath];
+    BOOL isDirectory = NO;
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath
+                    isDirectory:&isDirectory];
+    if (isExist) {
+        [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:filePath 
+                         inFileViewerRootedAtPath:isDirectory?filePath:nil];
     }
     else {
         [errorField setStringValue:@"無効なファイルパスです"];
     }
 }
+
 @end
