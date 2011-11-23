@@ -20,4 +20,5 @@
 @property (nonatomic, retain) IBOutlet NSButton *openButoon;
 
 -(IBAction)openButtonPushed:(id)sender;
+-(void)executeDfCommand;
 @end

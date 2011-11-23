@@ -23,6 +23,7 @@
 	
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    [self executeDfCommand];
 }
 
 -(IBAction)openButtonPushed:(id)sender {
@@ -34,10 +35,39 @@
     if (isExist) {
         [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:filePath 
                          inFileViewerRootedAtPath:isDirectory?filePath:nil];
+        [errorField setStringValue:@""];
     }
     else {
         [errorField setStringValue:@"無効なファイルパスです"];
     }
+}
+
+-(void)executeDfCommand {
+    NSTask *task = [[NSTask alloc] init];
+    NSPipe *pipe = [[NSPipe alloc] init];
+    [task setLaunchPath:@"/bin/df"];
+    [task setStandardOutput:pipe];
+    [task launch];
+    
+    NSFileHandle *handle = [pipe fileHandleForReading];
+    NSData *data = [handle  readDataToEndOfFile];
+    NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+    
+    NSArray *record = [string componentsSeparatedByString:@"\n"];
+    for (NSString *line in record) {
+        NSArray *elements = [line componentsSeparatedByString:@" "];
+        int count = (int)[elements count];
+        NSLog(@"device: %@", [elements objectAtIndex:0]);
+        NSLog(@"mnt point: %@", [elements objectAtIndex:(count - 1)]);
+    }
+    
+    [task release];
+    [pipe release];
+}
+
+- (BOOL)control: (NSControl *)control textView:(NSTextView *)textView doCommandBySelector: (SEL)commandSelector {
+    NSLog(@"%s", __func__);
+//    [self openButtonPushed:nil];
 }
 
 @end
