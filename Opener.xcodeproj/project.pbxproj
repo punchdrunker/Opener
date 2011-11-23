@@ -21,12 +21,12 @@
 		D91EFB6C147CE62200BF40AC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D91EFB6D147CE62200BF40AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D91EFB6E147CE62200BF40AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D91EFB71147CE62200BF40AC /* Opener-Info.plist */ = {isa = PBXFileReference; path = "Opener-Info.plist"; sourceTree = "<group>"; };
+		D91EFB71147CE62200BF40AC /* Opener-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Opener-Info.plist"; sourceTree = "<group>"; };
 		D91EFB73147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D91EFB75147CE62200BF40AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D91EFB77147CE62200BF40AC /* Opener-Prefix.pch */ = {isa = PBXFileReference; path = "Opener-Prefix.pch"; sourceTree = "<group>"; };
+		D91EFB77147CE62200BF40AC /* Opener-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Opener-Prefix.pch"; sourceTree = "<group>"; };
 		D91EFB79147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */ = {isa = PBXFileReference; path = PDAppDelegate.h; sourceTree = "<group>"; };
+		D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDAppDelegate.h; sourceTree = "<group>"; };
 		D91EFB7C147CE62200BF40AC /* PDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDAppDelegate.m; sourceTree = "<group>"; };
 		D91EFB7F147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
