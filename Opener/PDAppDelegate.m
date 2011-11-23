@@ -23,26 +23,58 @@
 	
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    [self executeDfCommand];
 }
 
 -(IBAction)openButtonPushed:(id)sender {
-    NSLog(@"%s", __func__);
     NSString *filePath = [urlField.stringValue stringByExpandingTildeInPath];
-    BOOL isDirectory = NO;
-    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath
-                    isDirectory:&isDirectory];
-    if (isExist) {
-        [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:filePath 
-                         inFileViewerRootedAtPath:isDirectory?filePath:nil];
+    if ([self openInFinder:filePath]) {
         [errorField setStringValue:@""];
+        return;
+    }
+    
+    // バックスラッシュパスの場合はマウント状況を確認して、対応するパスを探してみる
+    NSRange range = [filePath rangeOfString:@"\\\\"];
+    if (range.location==0&&range.length==2) {
+        NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
+        NSString *hostName = [pathArray objectAtIndex:2];
+        NSString *mountPoint = [self findMountPoint:hostName];
+        if (mountPoint!=nil) {
+            [pathArray removeObjectsInRange:NSMakeRange(0, 3)];
+            NSString *localPath = [NSString stringWithFormat:@"%@/%@",mountPoint, [pathArray componentsJoinedByString:@"/"]];
+            if ([self openInFinder:localPath]) {
+                [errorField setStringValue:@""];
+                return;
+            }
+        }
+    }
+    
+    [errorField setStringValue:@"無効なファイルパスです"];
+    
+}
+
+/* 
+ pathを渡すと存在するかを確認してopenし、YESを返す
+ 存在しなければNOを返す
+ */
+-(BOOL)openInFinder:(NSString *)path {
+    BOOL isDirectory = NO;
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path
+                                                        isDirectory:&isDirectory];
+    if (isExist) {
+        [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:path 
+                         inFileViewerRootedAtPath:isDirectory?path:nil];
+        return YES;
     }
     else {
-        [errorField setStringValue:@"無効なファイルパスです"];
+        return NO;
     }
 }
 
--(void)executeDfCommand {
+/* 
+ dfした結果からマウント中のdeviceを探してみる
+ */
+-(NSString *)findMountPoint:(NSString *)hostName {
+    NSString *mountPoint;
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [[NSPipe alloc] init];
     [task setLaunchPath:@"/bin/df"];
@@ -57,17 +89,17 @@
     for (NSString *line in record) {
         NSArray *elements = [line componentsSeparatedByString:@" "];
         int count = (int)[elements count];
-        NSLog(@"device: %@", [elements objectAtIndex:0]);
-        NSLog(@"mnt point: %@", [elements objectAtIndex:(count - 1)]);
+
+        NSRange range = [[elements objectAtIndex:0] rangeOfString:hostName];
+        if (0<range.length) {
+            mountPoint = [elements objectAtIndex:(count - 1)];
+            NSLog(@"mnt point: %@", mountPoint);            
+        }
     }
     
     [task release];
     [pipe release];
-}
-
-- (BOOL)control: (NSControl *)control textView:(NSTextView *)textView doCommandBySelector: (SEL)commandSelector {
-    NSLog(@"%s", __func__);
-//    [self openButtonPushed:nil];
+    return mountPoint;
 }
 
 @end

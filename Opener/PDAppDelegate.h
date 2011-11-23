@@ -20,5 +20,6 @@
 @property (nonatomic, retain) IBOutlet NSButton *openButoon;
 
 -(IBAction)openButtonPushed:(id)sender;
--(void)executeDfCommand;
+-(BOOL)openInFinder:(NSString *)path;
+-(NSString *)findMountPoint:(NSString *)hostName;
 @end
