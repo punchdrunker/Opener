@@ -74,7 +74,7 @@
  dfした結果からマウント中のdeviceを探してみる
  */
 -(NSString *)findMountPoint:(NSString *)hostName {
-    NSString *mountPoint;
+    NSString *mountPoint = nil;
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [[NSPipe alloc] init];
     [task setLaunchPath:@"/bin/df"];
