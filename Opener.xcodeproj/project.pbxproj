@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D903A871147D6140005C0390 /* PDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D903A872147D6140005C0390 /* PDAppDelegate.m */; };
 		D91EFB6A147CE62200BF40AC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91EFB69147CE62200BF40AC /* Cocoa.framework */; };
 		D91EFB74147CE62200BF40AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB72147CE62200BF40AC /* InfoPlist.strings */; };
 		D91EFB76147CE62200BF40AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D91EFB75147CE62200BF40AC /* main.m */; };
 		D91EFB7A147CE62200BF40AC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB78147CE62200BF40AC /* Credits.rtf */; };
-		D91EFB7D147CE62200BF40AC /* PDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D91EFB7C147CE62200BF40AC /* PDAppDelegate.m */; };
 		D91EFB80147CE62200BF40AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB7E147CE62200BF40AC /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D903A872147D6140005C0390 /* PDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDAppDelegate.m; sourceTree = "<group>"; };
 		D91EFB65147CE62200BF40AC /* Opener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Opener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91EFB69147CE62200BF40AC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D91EFB6C147CE62200BF40AC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -27,7 +28,6 @@
 		D91EFB77147CE62200BF40AC /* Opener-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Opener-Prefix.pch"; sourceTree = "<group>"; };
 		D91EFB79147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDAppDelegate.h; sourceTree = "<group>"; };
-		D91EFB7C147CE62200BF40AC /* PDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDAppDelegate.m; sourceTree = "<group>"; };
 		D91EFB7F147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */,
-				D91EFB7C147CE62200BF40AC /* PDAppDelegate.m */,
+				D903A872147D6140005C0390 /* PDAppDelegate.m */,
 				D91EFB7E147CE62200BF40AC /* MainMenu.xib */,
 				D91EFB70147CE62200BF40AC /* Supporting Files */,
 			);
@@ -136,6 +136,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = D91EFB5A147CE62100BF40AC;
 			productRefGroup = D91EFB66147CE62200BF40AC /* Products */;
@@ -166,7 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D91EFB76147CE62200BF40AC /* main.m in Sources */,
-				D91EFB7D147CE62200BF40AC /* PDAppDelegate.m in Sources */,
+				D903A871147D6140005C0390 /* PDAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +287,7 @@
 				D91EFB85147CE62200BF40AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

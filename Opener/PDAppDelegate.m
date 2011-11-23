@@ -32,7 +32,7 @@
         return;
     }
     
-    // バックスラッシュパスの場合はマウント状況を確認して、対応するパスを探してみる
+    // バックスラッシュパスの場合はマウント状況を確認して、対応するパスを探す
     NSRange range = [filePath rangeOfString:@"\\\\"];
     if (range.location==0&&range.length==2) {
         NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
@@ -71,7 +71,7 @@
 }
 
 /* 
- dfした結果からマウント中のdeviceを探してみる
+ dfした結果からマウント中のdeviceを探す
  */
 -(NSString *)findMountPoint:(NSString *)hostName {
     NSString *mountPoint = nil;

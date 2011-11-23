@@ -1349,7 +1349,6 @@
 							<string key="NSFrame">{{338, 12}, {119, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="942021549">
 								<int key="NSCellFlags">67239424</int>
@@ -1368,7 +1367,7 @@
 						<object class="NSTextField" id="936808645">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{22, 81}, {229, 17}}</string>
+							<string key="NSFrame">{{22, 84}, {229, 17}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="527908810"/>
@@ -1376,7 +1375,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="313587642">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">ファイルパスを入力してください</string>
+								<string key="NSContents">ファイルパスを入力：</string>
 								<object class="NSFont" key="NSSupport" id="749604961">
 									<string key="NSName">HiraKakuProN-W3</string>
 									<double key="NSSize">13</double>
@@ -2683,8 +2682,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="527908810"/>
 							<reference ref="116582109"/>
-							<reference ref="936808645"/>
 							<reference ref="972856172"/>
+							<reference ref="936808645"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3183,19 +3182,6 @@
 						<reference key="parent" ref="116582109"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">537</int>
-						<reference key="object" ref="936808645"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="313587642"/>
-						</array>
-						<reference key="parent" ref="439893737"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">538</int>
-						<reference key="object" ref="313587642"/>
-						<reference key="parent" ref="936808645"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">542</int>
 						<reference key="object" ref="972856172"/>
 						<array class="NSMutableArray" key="children">
@@ -3207,6 +3193,19 @@
 						<int key="objectID">543</int>
 						<reference key="object" ref="148327933"/>
 						<reference key="parent" ref="972856172"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">537</int>
+						<reference key="object" ref="936808645"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="313587642"/>
+						</array>
+						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">538</int>
+						<reference key="object" ref="313587642"/>
+						<reference key="parent" ref="936808645"/>
 					</object>
 				</array>
 			</object>
