@@ -7,6 +7,7 @@
 //
 
 #import "PDAppDelegate.h"
+#import "RegexKitLite.h"
 
 @implementation PDAppDelegate
 
@@ -14,13 +15,13 @@
 @synthesize urlField, openButoon, errorField;
 
 - (void)dealloc {
-    urlField = nil;
-    openButoon = nil;
-    errorField = nil;
+    self.urlField = nil;
+    self.openButoon = nil;
+    self.errorField = nil;
     
     [super dealloc];
 }
-	
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
 }
@@ -35,21 +36,18 @@
     // バックスラッシュパスの場合はマウント状況を確認して、対応するパスを探す
     NSRange range = [filePath rangeOfString:@"\\\\"];
     if (range.location==0&&range.length==2) {
-        NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
-        NSString *hostName = [pathArray objectAtIndex:2];
-        NSString *mountPoint = [self findMountPoint:hostName];
-        if (mountPoint!=nil) {
-            [pathArray removeObjectsInRange:NSMakeRange(0, 3)];
-            NSString *localPath = [NSString stringWithFormat:@"%@/%@",mountPoint, [pathArray componentsJoinedByString:@"/"]];
-            if ([self openInFinder:localPath]) {
+        
+        NSString *slashPath = [self findSlashPath:filePath];
+        if (slashPath) {
+            if ([self openInFinder:slashPath]) {
                 [errorField setStringValue:@""];
                 return;
             }
         }
+        
+        [errorField setStringValue:@"無効なファイルパスです"];
+        
     }
-    
-    [errorField setStringValue:@"無効なファイルパスです"];
-    
 }
 
 /* 
@@ -57,6 +55,7 @@
  存在しなければNOを返す
  */
 -(BOOL)openInFinder:(NSString *)path {
+    NSLog(@"path: %@", path);
     BOOL isDirectory = NO;
     BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path
                                                         isDirectory:&isDirectory];
@@ -73,33 +72,60 @@
 /* 
  dfした結果からマウント中のdeviceを探す
  */
--(NSString *)findMountPoint:(NSString *)hostName {
-    NSString *mountPoint = nil;
-    NSTask *task = [[NSTask alloc] init];
-    NSPipe *pipe = [[NSPipe alloc] init];
-    [task setLaunchPath:@"/bin/df"];
+-(NSString *)findSlashPath:(NSString *)filePath {
+    NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
+    NSString *hostName = [pathArray objectAtIndex:2];// 先頭2つは空文字
+    NSString *mountPoint;
+    NSString *dfOutput = [self execCommand:@"/bin/df"];
+    NSArray *record = [dfOutput componentsSeparatedByString:@"\n"];
+    
+    // dfの結果を1行ごとに検証
+    for (NSString *line in record) {
+        NSArray *elements = [line componentsSeparatedByString:@" "];
+        int count = (int)[elements count];
+        NSString *mountName = [elements objectAtIndex:0];
+        NSString *pattern = [NSString stringWithFormat:@"@%@(/|$)", [hostName lowercaseString]];
+        
+        // 与えられたパスからmacでのマウントポジションを探して、あればローカルのパスに置き換える
+        NSRange range = [mountName rangeOfRegex:pattern];
+        if (0<range.length) {
+            mountPoint = [elements objectAtIndex:(count - 1)];
+            NSString *mountHostName = [[mountName componentsSeparatedByString:@"@"] objectAtIndex:1];
+            NSArray *splitedHostName = [mountHostName componentsSeparatedByString:@"/"];
+            int count = (int)[splitedHostName count];
+            NSRange removeRange;
+            if (2<=count) {
+                if ([pathArray count]<=3) {//マウントポジションよりも浅いパスの指定だった場合
+                    removeRange = NSMakeRange(0, [pathArray count]);
+                }
+                else {
+                    removeRange = NSMakeRange(0, 2 + count);
+                }
+            }
+            else {
+                removeRange = NSMakeRange(0, 2);
+            }
+            [pathArray removeObjectsInRange:removeRange];
+            NSString *slashPath = [NSString stringWithFormat:@"%@/%@", 
+                                   mountPoint,
+                                   [pathArray componentsJoinedByString:@"/"]];
+            return slashPath;
+        }
+    }
+
+    return nil;
+}
+
+-(NSString *)execCommand:(NSString *)command {
+    NSTask *task = [[[NSTask alloc] init] autorelease];
+    NSPipe *pipe = [[[NSPipe alloc] init] autorelease];
+    [task setLaunchPath:command];
     [task setStandardOutput:pipe];
     [task launch];
     
     NSFileHandle *handle = [pipe fileHandleForReading];
     NSData *data = [handle  readDataToEndOfFile];
-    NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    
-    NSArray *record = [string componentsSeparatedByString:@"\n"];
-    for (NSString *line in record) {
-        NSArray *elements = [line componentsSeparatedByString:@" "];
-        int count = (int)[elements count];
-
-        NSRange range = [[elements objectAtIndex:0] rangeOfString:hostName];
-        if (0<range.length) {
-            mountPoint = [elements objectAtIndex:(count - 1)];
-            NSLog(@"mnt point: %@", mountPoint);            
-        }
-    }
-    
-    [task release];
-    [pipe release];
-    return mountPoint;
+    return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 }
 
 @end

@@ -21,5 +21,7 @@
 
 -(IBAction)openButtonPushed:(id)sender;
 -(BOOL)openInFinder:(NSString *)path;
--(NSString *)findMountPoint:(NSString *)hostName;
+-(NSString *)findSlashPath:(NSString *)filePath;
+-(NSString *)execCommand:(NSString *)command;
+
 @end

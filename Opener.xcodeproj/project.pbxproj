@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2418FC271495A5480066C742 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418FC1D1495A5480066C742 /* RegexKitLite.m */; };
+		2418FC2A1495A5CC0066C742 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2418FC291495A5CC0066C742 /* libicucore.dylib */; };
 		D903A871147D6140005C0390 /* PDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D903A872147D6140005C0390 /* PDAppDelegate.m */; };
 		D91EFB6A147CE62200BF40AC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91EFB69147CE62200BF40AC /* Cocoa.framework */; };
 		D91EFB74147CE62200BF40AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB72147CE62200BF40AC /* InfoPlist.strings */; };
@@ -16,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2418FC1B1495A5480066C742 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		2418FC1D1495A5480066C742 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		2418FC291495A5CC0066C742 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D903A872147D6140005C0390 /* PDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDAppDelegate.m; sourceTree = "<group>"; };
 		D91EFB65147CE62200BF40AC /* Opener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Opener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91EFB69147CE62200BF40AC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2418FC2A1495A5CC0066C742 /* libicucore.dylib in Frameworks */,
 				D91EFB6A147CE62200BF40AC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,9 +49,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2418FC101495A5480066C742 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				2418FC1B1495A5480066C742 /* RegexKitLite.h */,
+				2418FC1D1495A5480066C742 /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
 		D91EFB5A147CE62100BF40AC = {
 			isa = PBXGroup;
 			children = (
+				2418FC291495A5CC0066C742 /* libicucore.dylib */,
 				D91EFB6F147CE62200BF40AC /* Opener */,
 				D91EFB68147CE62200BF40AC /* Frameworks */,
 				D91EFB66147CE62200BF40AC /* Products */,
@@ -85,6 +101,7 @@
 				D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */,
 				D903A872147D6140005C0390 /* PDAppDelegate.m */,
 				D91EFB7E147CE62200BF40AC /* MainMenu.xib */,
+				2418FC101495A5480066C742 /* RegexKitLite */,
 				D91EFB70147CE62200BF40AC /* Supporting Files */,
 			);
 			path = Opener;
@@ -168,6 +185,7 @@
 			files = (
 				D91EFB76147CE62200BF40AC /* main.m in Sources */,
 				D903A871147D6140005C0390 /* PDAppDelegate.m in Sources */,
+				2418FC271495A5480066C742 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
