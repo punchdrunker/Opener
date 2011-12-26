@@ -15,6 +15,8 @@
 @synthesize urlField, openButoon, errorField;
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     self.urlField = nil;
     self.openButoon = nil;
     self.errorField = nil;
@@ -23,7 +25,10 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(editingDidEnd:) 
+                                                 name:NSControlTextDidChangeNotification
+                                               object:nil];
 }
 
 -(IBAction)openButtonPushed:(id)sender {
@@ -31,6 +36,12 @@
     if ([self openInFinder:filePath]) {
         [errorField setStringValue:@""];
         return;
+    }
+    
+    // ¥マーク区切りのパスの場合はバックスラッシュパスとして扱う
+    NSRange yenMarkRange = [filePath rangeOfString:@"¥¥"];
+    if (yenMarkRange.location==0&&yenMarkRange.length==2) {
+        filePath = [filePath stringByReplacingOccurrencesOfString:@"¥" withString:@"\\"];
     }
     
     // バックスラッシュパスの場合はマウント状況を確認して、対応するパスを探す
@@ -44,10 +55,8 @@
                 return;
             }
         }
-        
-        [errorField setStringValue:@"無効なファイルパスです"];
-        
     }
+    [errorField setStringValue:@"無効なファイルパスです"];
 }
 
 /* 
@@ -74,9 +83,12 @@
  */
 -(NSString *)findSlashPath:(NSString *)filePath {
     NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
-    NSString *hostName = [pathArray objectAtIndex:2];// 先頭2つは空文字
+    // 先頭2つの要素は空文字なので飛ばす
+    NSString *hostName = [pathArray objectAtIndex:2];
     NSString *mountPoint;
     NSString *dfOutput = [self execCommand:@"/bin/df"];
+    if (nil==dfOutput) return nil;
+    
     NSArray *record = [dfOutput componentsSeparatedByString:@"\n"];
     
     // dfの結果を1行ごとに検証
@@ -95,7 +107,8 @@
             int count = (int)[splitedHostName count];
             NSRange removeRange;
             if (2<=count) {
-                if ([pathArray count]<=3) {//マウントポジションよりも浅いパスの指定だった場合
+                //マウントポジションよりも浅いパスの指定だった場合
+                if ([pathArray count]<=3) {
                     removeRange = NSMakeRange(0, [pathArray count]);
                 }
                 else {
@@ -118,14 +131,39 @@
 
 -(NSString *)execCommand:(NSString *)command {
     NSTask *task = [[[NSTask alloc] init] autorelease];
-    NSPipe *pipe = [[[NSPipe alloc] init] autorelease];
+    NSPipe *pipe = [NSPipe pipe];
+    
     [task setLaunchPath:command];
     [task setStandardOutput:pipe];
-    [task launch];
     
+    @try {
+        [task launch];
+    }
+    @catch (NSException *ex) {
+        NSLog(@"Exception: %@", [ex description]);
+        return nil;
+    }
+    @finally {
+    }
+        
     NSFileHandle *handle = [pipe fileHandleForReading];
     NSData *data = [handle  readDataToEndOfFile];
     return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 }
 
+#pragma mark - NSTextFieldDelegate
+
+// 改行を取り除く
+- (BOOL)editingDidEnd:(NSNotification *)notification {
+    NSLog(@"%s", __func__);
+    NSString *input = [urlField.stringValue stringByExpandingTildeInPath];
+    NSString *pattern = [NSString stringWithFormat:@"\r|\n"];
+    NSRange range = [input rangeOfRegex:pattern];
+    if (0<range.length) {
+        input = [input stringByReplacingOccurrencesOfRegex:pattern withString:@""];
+        [urlField setStringValue:input];
+    }
+
+    return YES;
+}
 @end
