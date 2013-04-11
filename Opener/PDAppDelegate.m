@@ -8,6 +8,7 @@
 
 #import "PDAppDelegate.h"
 #import "RegexKitLite.h"
+#import <NetFS/NetFS.h>
 
 @implementation PDAppDelegate
 
@@ -25,10 +26,25 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(editingDidEnd:) 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(editingDidEnd:)
                                                  name:NSControlTextDidChangeNotification
                                                object:nil];
+}
+
+// dockでクリックされた時に発火
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+    if (![_window isVisible]) {
+        [_window makeKeyAndOrderFront:nil];
+    }
+	return YES;
+}
+
+- (IBAction)showWindow:(id)sender {
+    if (![_window isVisible]) {
+        [_window makeKeyAndOrderFront:sender];
+    }
 }
 
 -(IBAction)openButtonPushed:(id)sender {
@@ -48,28 +64,69 @@
     NSRange range = [filePath rangeOfString:@"\\\\"];
     if (range.location==0&&range.length==2) {
         
-        NSString *slashPath = [self findSlashPath:filePath];
+        NSString *slashPath = [self findLocalPath:filePath];
         if (slashPath) {
             if ([self openInFinder:slashPath]) {
                 [errorField setStringValue:@""];
                 return;
             }
         }
+        
+        // パスが存在しなければ、マウントしてみる
+        BOOL result = [self mountWithFilePath:filePath];
+        if (result==YES) {
+            slashPath = [self findLocalPath:filePath];
+            if (slashPath) {
+                if ([self openInFinder:slashPath]) {
+                    [errorField setStringValue:@""];
+                    return;
+                }
+            }
+        }
+        
     }
+    
     [errorField setStringValue:@"無効なファイルパスです"];
 }
 
-/* 
+-(BOOL)mountWithFilePath:(NSString *)path {
+    return [self mountViaSamba:path];
+}
+
+-(BOOL)mountViaSamba:(NSString *)path {
+    NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[path componentsSeparatedByString:@"\\"]];
+    if ([pathArray count] < 4) {
+        return NO;
+    }
+    // 先頭2つの要素は空文字なので飛ばす
+    NSString *hostName = [pathArray objectAtIndex:2];
+    NSString *mountPoint = [pathArray objectAtIndex:3];
+    
+    NSString *urlString = [NSString stringWithFormat:@"smb://%@/%@", hostName, mountPoint];
+    NSURL *url = [NSURL URLWithString:urlString];
+    CFArrayRef mountpoints = NULL;
+    int result = 0;
+    result = NetFSMountURLSync((CFURLRef)url,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     &mountpoints
+                                     );
+    return (result==0);
+}
+
+/*
  pathを渡すと存在するかを確認してopenし、YESを返す
  存在しなければNOを返す
  */
 -(BOOL)openInFinder:(NSString *)path {
-    NSLog(@"path: %@", path);
     BOOL isDirectory = NO;
     BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path
                                                         isDirectory:&isDirectory];
     if (isExist) {
-        [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:path 
+        [[NSWorkspace sharedWorkspace] selectFile:isDirectory?nil:path
                          inFileViewerRootedAtPath:isDirectory?path:nil];
         return YES;
     }
@@ -78,10 +135,10 @@
     }
 }
 
-/* 
+/*
  dfした結果からマウント中のdeviceを探す
  */
--(NSString *)findSlashPath:(NSString *)filePath {
+-(NSString *)findLocalPath:(NSString *)filePath {
     NSMutableArray *pathArray = [NSMutableArray arrayWithArray:[filePath componentsSeparatedByString:@"\\"]];
     // 先頭2つの要素は空文字なので飛ばす
     NSString *hostName = [pathArray objectAtIndex:2];
@@ -119,7 +176,7 @@
                 removeRange = NSMakeRange(0, 2);
             }
             [pathArray removeObjectsInRange:removeRange];
-            NSString *slashPath = [NSString stringWithFormat:@"%@/%@", 
+            NSString *slashPath = [NSString stringWithFormat:@"%@/%@",
                                    mountPoint,
                                    [pathArray componentsJoinedByString:@"/"]];
             return slashPath;
@@ -145,7 +202,7 @@
     }
     @finally {
     }
-        
+    
     NSFileHandle *handle = [pipe fileHandleForReading];
     NSData *data = [handle  readDataToEndOfFile];
     return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
@@ -163,7 +220,7 @@
         input = [input stringByReplacingOccurrencesOfRegex:pattern withString:@""];
         [urlField setStringValue:input];
     }
-
+    
     return YES;
 }
 @end

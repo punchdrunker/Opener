@@ -15,6 +15,16 @@
 		D91EFB76147CE62200BF40AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D91EFB75147CE62200BF40AC /* main.m */; };
 		D91EFB7A147CE62200BF40AC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB78147CE62200BF40AC /* Credits.rtf */; };
 		D91EFB80147CE62200BF40AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91EFB7E147CE62200BF40AC /* MainMenu.xib */; };
+		D95323C4171671CD007A5CB8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95323C3171671CD007A5CB8 /* SenTestingKit.framework */; };
+		D95323C5171671CD007A5CB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91EFB69147CE62200BF40AC /* Cocoa.framework */; };
+		D95323CB171671CD007A5CB8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D95323C9171671CD007A5CB8 /* InfoPlist.strings */; };
+		D95323CE171671CD007A5CB8 /* OpenerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D95323CD171671CD007A5CB8 /* OpenerTests.m */; };
+		D95323D31716738F007A5CB8 /* PDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D903A872147D6140005C0390 /* PDAppDelegate.m */; };
+		D95323D4171674A4007A5CB8 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418FC1D1495A5480066C742 /* RegexKitLite.m */; };
+		D95323D5171674C8007A5CB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D91EFB75147CE62200BF40AC /* main.m */; };
+		D95323D6171674CE007A5CB8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2418FC291495A5CC0066C742 /* libicucore.dylib */; };
+		D95323D8171682B7007A5CB8 /* NetFS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95323D7171682B7007A5CB8 /* NetFS.framework */; };
+		D95323D9171682C0007A5CB8 /* NetFS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95323D7171682B7007A5CB8 /* NetFS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +44,14 @@
 		D91EFB79147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDAppDelegate.h; sourceTree = "<group>"; };
 		D91EFB7F147CE62200BF40AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D95323C2171671CD007A5CB8 /* OpenerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D95323C3171671CD007A5CB8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D95323C8171671CD007A5CB8 /* OpenerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenerTests-Info.plist"; sourceTree = "<group>"; };
+		D95323CA171671CD007A5CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D95323CC171671CD007A5CB8 /* OpenerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenerTests.h; sourceTree = "<group>"; };
+		D95323CD171671CD007A5CB8 /* OpenerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenerTests.m; sourceTree = "<group>"; };
+		D95323CF171671CD007A5CB8 /* OpenerTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenerTests-Prefix.pch"; sourceTree = "<group>"; };
+		D95323D7171682B7007A5CB8 /* NetFS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetFS.framework; path = System/Library/Frameworks/NetFS.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,8 +59,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95323D8171682B7007A5CB8 /* NetFS.framework in Frameworks */,
 				2418FC2A1495A5CC0066C742 /* libicucore.dylib in Frameworks */,
 				D91EFB6A147CE62200BF40AC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D95323BE171671CD007A5CB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D95323D9171682C0007A5CB8 /* NetFS.framework in Frameworks */,
+				D95323C4171671CD007A5CB8 /* SenTestingKit.framework in Frameworks */,
+				D95323C5171671CD007A5CB8 /* Cocoa.framework in Frameworks */,
+				D95323D6171674CE007A5CB8 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,8 +91,8 @@
 		D91EFB5A147CE62100BF40AC = {
 			isa = PBXGroup;
 			children = (
-				2418FC291495A5CC0066C742 /* libicucore.dylib */,
 				D91EFB6F147CE62200BF40AC /* Opener */,
+				D95323C6171671CD007A5CB8 /* OpenerTests */,
 				D91EFB68147CE62200BF40AC /* Frameworks */,
 				D91EFB66147CE62200BF40AC /* Products */,
 			);
@@ -72,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D91EFB65147CE62200BF40AC /* Opener.app */,
+				D95323C2171671CD007A5CB8 /* OpenerTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,7 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				D91EFB69147CE62200BF40AC /* Cocoa.framework */,
+				2418FC291495A5CC0066C742 /* libicucore.dylib */,
+				D95323D7171682B7007A5CB8 /* NetFS.framework */,
 				D91EFB6B147CE62200BF40AC /* Other Frameworks */,
+				D95323C3171671CD007A5CB8 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,9 +132,9 @@
 		D91EFB6F147CE62200BF40AC /* Opener */ = {
 			isa = PBXGroup;
 			children = (
+				D91EFB7E147CE62200BF40AC /* MainMenu.xib */,
 				D91EFB7B147CE62200BF40AC /* PDAppDelegate.h */,
 				D903A872147D6140005C0390 /* PDAppDelegate.m */,
-				D91EFB7E147CE62200BF40AC /* MainMenu.xib */,
 				2418FC101495A5480066C742 /* RegexKitLite */,
 				D91EFB70147CE62200BF40AC /* Supporting Files */,
 			);
@@ -115,6 +149,26 @@
 				D91EFB75147CE62200BF40AC /* main.m */,
 				D91EFB77147CE62200BF40AC /* Opener-Prefix.pch */,
 				D91EFB78147CE62200BF40AC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D95323C6171671CD007A5CB8 /* OpenerTests */ = {
+			isa = PBXGroup;
+			children = (
+				D95323CC171671CD007A5CB8 /* OpenerTests.h */,
+				D95323CD171671CD007A5CB8 /* OpenerTests.m */,
+				D95323C7171671CD007A5CB8 /* Supporting Files */,
+			);
+			path = OpenerTests;
+			sourceTree = "<group>";
+		};
+		D95323C7171671CD007A5CB8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D95323C8171671CD007A5CB8 /* OpenerTests-Info.plist */,
+				D95323C9171671CD007A5CB8 /* InfoPlist.strings */,
+				D95323CF171671CD007A5CB8 /* OpenerTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -139,6 +193,24 @@
 			productReference = D91EFB65147CE62200BF40AC /* Opener.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D95323C1171671CD007A5CB8 /* OpenerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D95323D2171671CE007A5CB8 /* Build configuration list for PBXNativeTarget "OpenerTests" */;
+			buildPhases = (
+				D95323BD171671CD007A5CB8 /* Sources */,
+				D95323BE171671CD007A5CB8 /* Frameworks */,
+				D95323BF171671CD007A5CB8 /* Resources */,
+				D95323C0171671CD007A5CB8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenerTests;
+			productName = OpenerTests;
+			productReference = D95323C2171671CD007A5CB8 /* OpenerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,6 +233,7 @@
 			projectRoot = "";
 			targets = (
 				D91EFB64147CE62100BF40AC /* Opener */,
+				D95323C1171671CD007A5CB8 /* OpenerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -176,7 +249,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D95323BF171671CD007A5CB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D95323CB171671CD007A5CB8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D95323C0171671CD007A5CB8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D91EFB61147CE62100BF40AC /* Sources */ = {
@@ -186,6 +283,17 @@
 				D91EFB76147CE62200BF40AC /* main.m in Sources */,
 				D903A871147D6140005C0390 /* PDAppDelegate.m in Sources */,
 				2418FC271495A5480066C742 /* RegexKitLite.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D95323BD171671CD007A5CB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D95323CE171671CD007A5CB8 /* OpenerTests.m in Sources */,
+				D95323D31716738F007A5CB8 /* PDAppDelegate.m in Sources */,
+				D95323D4171674A4007A5CB8 /* RegexKitLite.m in Sources */,
+				D95323D5171674C8007A5CB8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +322,14 @@
 				D91EFB7F147CE62200BF40AC /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		D95323C9171671CD007A5CB8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D95323CA171671CD007A5CB8 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -286,6 +402,52 @@
 			};
 			name = Release;
 		};
+		D95323D0171671CD007A5CB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OpenerTests/OpenerTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "OpenerTests/OpenerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D95323D1171671CD007A5CB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OpenerTests/OpenerTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "OpenerTests/OpenerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -306,6 +468,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D95323D2171671CE007A5CB8 /* Build configuration list for PBXNativeTarget "OpenerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D95323D0171671CD007A5CB8 /* Debug */,
+				D95323D1171671CD007A5CB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
