@@ -102,7 +102,7 @@
     NSString *hostName = [pathArray objectAtIndex:2];
     NSString *mountPoint = [pathArray objectAtIndex:3];
     
-    NSString *urlString = [NSString stringWithFormat:@"smb://%@/%@", hostName, mountPoint];
+    NSString *urlString = [NSString stringWithFormat:@"smb://%@/%@", [hostName lowercaseString], mountPoint];
     NSURL *url = [NSURL URLWithString:urlString];
     CFArrayRef mountpoints = NULL;
     int result = 0;
