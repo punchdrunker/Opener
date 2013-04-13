@@ -26,6 +26,7 @@
 		D95323D8171682B7007A5CB8 /* NetFS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95323D7171682B7007A5CB8 /* NetFS.framework */; };
 		D95323D9171682C0007A5CB8 /* NetFS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95323D7171682B7007A5CB8 /* NetFS.framework */; };
 		D9673D931718FE550030984F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9673D951718FE550030984F /* Localizable.strings */; };
+		D9F84B2517191FA000E2333E /* Opener.icns in Resources */ = {isa = PBXBuildFile; fileRef = D9F84B2417191FA000E2333E /* Opener.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,9 +55,10 @@
 		D95323CF171671CD007A5CB8 /* OpenerTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenerTests-Prefix.pch"; sourceTree = "<group>"; };
 		D95323D7171682B7007A5CB8 /* NetFS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetFS.framework; path = System/Library/Frameworks/NetFS.framework; sourceTree = SDKROOT; };
 		D9673D901718FCE90030984F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D9673D941718FE550030984F /* ja */ = {isa = PBXFileReference; lastKnownFileType = file; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D9673D961718FE5B0030984F /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9673D941718FE550030984F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D9673D961718FE5B0030984F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D9673D971718FFD00030984F /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D9F84B2417191FA000E2333E /* Opener.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Opener.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		D91EFB70147CE62200BF40AC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D9F84B2417191FA000E2333E /* Opener.icns */,
 				D91EFB71147CE62200BF40AC /* Opener-Info.plist */,
 				D9673D951718FE550030984F /* Localizable.strings */,
 				D91EFB72147CE62200BF40AC /* InfoPlist.strings */,
@@ -254,6 +257,7 @@
 				D91EFB7A147CE62200BF40AC /* Credits.rtf in Resources */,
 				D91EFB80147CE62200BF40AC /* MainMenu.xib in Resources */,
 				D9673D931718FE550030984F /* Localizable.strings in Resources */,
+				D9F84B2517191FA000E2333E /* Opener.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
