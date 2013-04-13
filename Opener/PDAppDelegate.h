@@ -19,9 +19,10 @@
 @property (nonatomic, retain) IBOutlet NSTextField *errorField;
 @property (nonatomic, retain) IBOutlet NSButton *openButoon;
 
+-(IBAction)showWindow:(id)sender;
 -(IBAction)openButtonPushed:(id)sender;
 -(BOOL)openInFinder:(NSString *)path;
--(NSString *)findSlashPath:(NSString *)filePath;
+-(NSString *)findLocalPath:(NSString *)filePath;
 -(NSString *)execCommand:(NSString *)command;
 
 @end
