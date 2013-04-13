@@ -85,8 +85,8 @@
         }
         
     }
-    
-    [errorField setStringValue:@"無効なファイルパスです"];
+    NSString *errorMessage = NSLocalizedString(@"InvalidFilePath", @"Invalid file path");
+    [errorField setStringValue:errorMessage];
 }
 
 -(BOOL)mountWithFilePath:(NSString *)path {
