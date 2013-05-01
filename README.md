@@ -6,7 +6,7 @@ Windowsでネットワークドライブとして割り当てられた状態の�
 
 ## Quick start
 
-1. <https://sourceforge.net/projects/opener/files/>からzipファイルをダウンロードして展開
+1. <https://sourceforge.net/projects/win-path-opener/files/>からzipファイルをダウンロードして展開
 
 2. 展開したOpener.appをダブルクリックで起動(アプリケーションフォルダに移動などは適宜)
 
