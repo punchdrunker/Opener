@@ -32,5 +32,25 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Opener.app/Open Selection</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>requestService</string>
+			<key>NSPortName</key>
+			<string>Opener</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSStringPboardType</string>
+			</array>
+			<key>NSUserData</key>
+			<string>open-selection</string>
+		</dict>
+	</array>
 </dict>
 </plist>
