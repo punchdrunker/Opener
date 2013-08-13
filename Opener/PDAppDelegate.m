@@ -26,6 +26,10 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
+    [NSApp setServicesProvider:self];
+    NSUpdateDynamicServices();
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(editingDidEnd:)
                                                  name:NSControlTextDidChangeNotification
@@ -223,4 +227,22 @@
     
     return YES;
 }
+
+#pragma mark - Service Handler
+
+- (void)requestService:(NSPasteboard *)pboard
+              userData:(NSString *)userData
+                 error:(NSString **)error
+{
+    NSArray *types = [pboard types];
+    if (![types containsObject:NSPasteboardTypeString]) {
+        *error = @"Error: could not get string";
+        return;
+    }
+
+    NSString *filePath = [pboard stringForType:NSPasteboardTypeString];
+    self.urlField.stringValue = filePath;
+    [self openButtonPushed:self];
+}
+
 @end
