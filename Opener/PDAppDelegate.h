@@ -24,5 +24,7 @@
 -(BOOL)openInFinder:(NSString *)path;
 -(NSString *)findLocalPath:(NSString *)filePath;
 -(NSString *)execCommand:(NSString *)command;
-
+-(NSString *)deleteNewLines:(NSString *)string;
+-(NSString *)expandTilde:(NSString *)string;
+-(NSString *)trim:(NSString *)string;
 @end

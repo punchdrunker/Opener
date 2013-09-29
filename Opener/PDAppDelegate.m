@@ -127,6 +127,8 @@
  */
 -(BOOL)openInFinder:(NSString *)path {
     BOOL isDirectory = NO;
+    path = [self trim:path];
+    path = [self expandTilde:path];
     BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path
                                                         isDirectory:&isDirectory];
     if (isExist) {
@@ -214,16 +216,10 @@
 
 #pragma mark - NSTextFieldDelegate
 
-// 改行を取り除く
 - (BOOL)editingDidEnd:(NSNotification *)notification {
     NSLog(@"%s", __func__);
-    NSString *input = [urlField.stringValue stringByExpandingTildeInPath];
-    NSString *pattern = [NSString stringWithFormat:@"\r|\n"];
-    NSRange range = [input rangeOfRegex:pattern];
-    if (0<range.length) {
-        input = [input stringByReplacingOccurrencesOfRegex:pattern withString:@""];
-        [urlField setStringValue:input];
-    }
+    NSString *input = urlField.stringValue;
+    [urlField setStringValue:[self deleteNewLines:input]];
     
     return YES;
 }
@@ -244,5 +240,40 @@
     self.urlField.stringValue = filePath;
     [self openButtonPushed:self];
 }
+
+#pragma mark - Utils
+
+
+// delete newline chars
+- (NSString *)deleteNewLines:(NSString *)string {
+    NSLog(@"%s", __func__);
+    NSString *pattern = [NSString stringWithFormat:@"\r|\n"];
+    NSRange range = [string rangeOfRegex:pattern];
+    if (0<range.length) {
+        string = [string stringByReplacingOccurrencesOfRegex:pattern withString:@""];
+    }
+    return string;
+}
+
+// expand tilde to home directory
+- (NSString *)expandTilde:(NSString *)string {
+    NSLog(@"%s", __func__);
+    NSString *pattern = [NSString stringWithFormat:@"~"];
+    NSRange range = [string rangeOfRegex:pattern];
+    if (0<range.length) {
+        string = [string stringByExpandingTildeInPath];
+    }
+    
+    return string;
+}
+
+// delete spaces and newline chars
+- (NSString *)trim:(NSString *)string {
+    NSLog(@"%s", __func__);
+    string = [self deleteNewLines:string];
+    
+    return [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 
 @end
